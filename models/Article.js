@@ -1,4 +1,10 @@
+// -- Dependencies --
+
+// Mongoose database model
 var mongoose = require("mongoose");
+
+
+// -- Main --
 
 // Save a reference to the Schema constructor
 var Schema = mongoose.Schema;
@@ -22,6 +28,10 @@ var ArticleSchema = new Schema({
   note: {
     type: Schema.Types.ObjectId,
     ref: "Note"
+  },
+  saved: {
+    type: Boolean,
+    default: false
   }
 });
 
