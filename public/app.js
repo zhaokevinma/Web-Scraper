@@ -11,27 +11,22 @@ $.getJSON("/articles", function(data) {
 // When you click the save button to save an article
 $(document).on("click", ".savearticle", function(event) {
   event.preventDefault();
-  // // Grab the id associated with the article from the submit button
-  // var thisId = $(this).attr("id");
+  // Grab the id associated with the article from the submit button
+  var thisId = $(this).attr("id");
 
-  // // Run a POST request to change the note, using what's entered in the inputs
-  // $.ajax({
-  //   method: "POST",
-  //   url: "/articles/" + thisId,
-  //   data: {
-  //     // Value taken from title input
-  //     title: $("#titleinput").val(),
-  //     // Value taken from note textarea
-  //     body: $("#bodyinput").val()
-  //   }
-  // })
-  //   // With that done
-  //   .then(function(data) {
-  //     // Log the response
-  //     console.log(data);
-  //     // Empty the notes section
-  //     $("#notes").empty();
-  //   });
+  // Run a POST request to change the note, using what's entered in the inputs
+  $.ajax({
+    method: "POST",
+    url: "/saved/" + thisId
+  })
+    // With that done
+    .then(function(data) {
+      // Log the response
+      // Now the response is not logging true in saved but in database it is saved
+      //  -- P2 -- BUG 
+      // Can revisit if time allowed
+      console.log(data);
+    });
 
   // Also, remove the values entered in the input and textarea for note entry
   $(this).text("Saved");

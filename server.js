@@ -143,6 +143,22 @@ app.post("/articles/:id", function(req, res) {
   })
 });
 
+// Route for saving/updating an Article's associated Note
+app.post("/saved/:id", function(req, res) {
+  // TODO
+  // ====
+  // save the new note that gets posted to the Notes collection
+  // then find an article from the req.params.id
+  // and update it's "note" property with the _id of the new note
+  db.Article.findOneAndUpdate({_id: req.params.id}, {saved: true})
+  .then(function(dbArticle) {
+    res.json(dbArticle);
+  })
+  .catch(function(err) {
+    res.json(err);
+  })
+});
+
 // Start the server
 app.listen(PORT, function() {
   console.log("App running on port " + PORT + "!");
