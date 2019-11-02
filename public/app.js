@@ -19,6 +19,54 @@ $.getJSON("/saved", function(data) {
 });
 
 // When you click the save button to save an article
+$(document).on("click", "#clear", function(event) {
+  event.preventDefault();
+
+  // Run a POST request to change the note, using what's entered in the inputs
+  $.ajax({
+    method: "GET",
+    url: "/clear"
+  })
+    // With that done
+    .then(function(data) {
+      // Log the response
+      // Now the response is not logging true in saved but in database it is saved
+      //  -- P2 -- BUG 
+      // Can revisit if time allowed
+      console.log(data);
+    });
+
+  // Also, remove the values entered in the input and textarea for note entry
+  $(this).text("Cleared");
+  $(this).attr("disabled", true);
+  location.reload();
+});
+
+// When you click the save button to save an article
+$(document).on("click", "#scrape", function(event) {
+  event.preventDefault();
+
+  // Run a POST request to change the note, using what's entered in the inputs
+  $.ajax({
+    method: "GET",
+    url: "/scrape"
+  })
+    // With that done
+    .then(function(data) {
+      // Log the response
+      // Now the response is not logging true in saved but in database it is saved
+      //  -- P2 -- BUG 
+      // Can revisit if time allowed
+      console.log(data);
+    });
+
+  // Also, remove the values entered in the input and textarea for note entry
+  $(this).text("Scraped");
+  $(this).attr("disabled", true);
+  location.reload();
+});
+
+// When you click the save button to save an article
 $(document).on("click", ".savearticle", function(event) {
   event.preventDefault();
   // Grab the id associated with the article from the submit button

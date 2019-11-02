@@ -46,6 +46,17 @@ mongoose.connect("mongodb://localhost/webscraper", { useNewUrlParser: true });
 
 // -- Routes --
 
+// Route for getting all Articles from the db
+app.get("/clear", function(req, res) {
+  // TODO: Finish the route so it grabs all of the articles
+  mongoose.connection.collections['articles'].drop( function(err) {
+    console.log('collection dropped');
+  });
+
+  mongoose.connection.collections['notes'].drop( function(err) {
+    console.log('collection dropped');
+  });
+});
 
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
@@ -122,7 +133,7 @@ app.post("/articles/:id", function(req, res) {
   // and update it's "note" property with the _id of the new note
   db.Note.create(req.body)
   .then(function(dbNote) {
-    return db.Article.findOneAndUpdate({_id: req.params.id}, {$push: {note: dbNote._id} }, {new: true});
+    return db.Article.findOneAndUpdate({_id: req.params.id}, { note: dbNote._id });
   })
   .then(function(dbArticle) {
     res.json(dbArticle);
