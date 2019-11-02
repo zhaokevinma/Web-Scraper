@@ -113,17 +113,6 @@ app.get("/articles/:id", function(req, res) {
   })
 });
 
-// GET Route for responding json with saved articles
-app.get("/saved", function(req, res) {
-  db.Article.find({ saved: true }) 
-  .then(function(data) {
-    res.json(data);
-  })
-  .catch(function(err) {
-    res.json(err);
-  })
-});
-
 // Route for saving/updating an Article's associated Note
 app.post("/articles/:id", function(req, res) {
   // TODO
@@ -143,7 +132,18 @@ app.post("/articles/:id", function(req, res) {
   })
 });
 
-// Route for saving/updating an Article's associated Note
+// GET Route for responding json with saved articles
+app.get("/saved", function(req, res) {
+  db.Article.find({ saved: true }) 
+  .then(function(data) {
+    res.json(data);
+  })
+  .catch(function(err) {
+    res.json(err);
+  })
+});
+
+// Route for saving an article
 app.post("/saved/:id", function(req, res) {
   // TODO
   // ====
@@ -151,6 +151,22 @@ app.post("/saved/:id", function(req, res) {
   // then find an article from the req.params.id
   // and update it's "note" property with the _id of the new note
   db.Article.findOneAndUpdate({_id: req.params.id}, {saved: true})
+  .then(function(dbArticle) {
+    res.json(dbArticle);
+  })
+  .catch(function(err) {
+    res.json(err);
+  })
+});
+
+// Route for unsaving an article
+app.post("/unsaved/:id", function(req, res) {
+  // TODO
+  // ====
+  // save the new note that gets posted to the Notes collection
+  // then find an article from the req.params.id
+  // and update it's "note" property with the _id of the new note
+  db.Article.findOneAndUpdate({_id: req.params.id}, {saved: false})
   .then(function(dbArticle) {
     res.json(dbArticle);
   })

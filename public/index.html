@@ -14,12 +14,18 @@
       #articles {
         display: inline-block;
         overflow: auto;
-        width: 60%;
+        width: 33%;
+        height: 700px;
+      }
+      #saved {
+        display: inline-block;
+        overflow: auto;
+        width: 33%;
         height: 700px;
       }
       #notes {
         float: right;
-        width: 30%;
+        width: 33%;
       }
       textarea, input {
         display: block;
@@ -39,8 +45,12 @@
   <body>
     <div id="wrapper">
       <h1>Note Scraper</h1>
-      <h2><i>If you can do this...the homework should be no problem.</i></h2>
-      <div id="articles"></div>
+      <div id="saved">
+        <h3>Saved</h3>
+      </div>
+      <div id="articles">
+        <h3>Scraped</h3>
+      </div>
       <div id="notes"></div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
