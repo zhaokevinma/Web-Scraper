@@ -2,15 +2,16 @@
 $.getJSON("/articles", function(data) {
   // For each one
   for (var i = 0; i < data.length; i++) {
+    // If it is not yet saved
     if (!data[i].saved) {
-      // Display the apropos information on the page
+      // Display the apropos information in the articles column
       $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
       $("#articles").append("<button class='savearticle btn-primary' id='" + data[i]._id + "'> Save " + "</button>");
     }
   }
 });
 
-// Grab the articles as a json
+// Grab the saved articles as a json
 $.getJSON("/saved", function(data) {
   // For each one
   for (var i = 0; i < data.length; i++) {
@@ -20,21 +21,18 @@ $.getJSON("/saved", function(data) {
   }
 });
 
-// When you click the save button to save an article
+// When you click the clear button
 $(document).on("click", "#clear", function(event) {
+
   event.preventDefault();
 
-  // Run a POST request to change the note, using what's entered in the inputs
+  // Run a GET request to /clear
   $.ajax({
     method: "GET",
     url: "/clear"
   })
     // With that done
     .then(function(data) {
-      // Log the response
-      // Now the response is not logging true in saved but in database it is saved
-      //  -- P2 -- BUG 
-      // Can revisit if time allowed
       console.log(data);
     });
 
@@ -44,21 +42,19 @@ $(document).on("click", "#clear", function(event) {
   location.reload();
 });
 
-// When you click the save button to save an article
+// When you click the scrape button
 $(document).on("click", "#scrape", function(event) {
+
   event.preventDefault();
 
-  // Run a POST request to change the note, using what's entered in the inputs
+  // Run a GET request to scrape
   $.ajax({
     method: "GET",
     url: "/scrape"
   })
     // With that done
     .then(function(data) {
-      // Log the response
-      // Now the response is not logging true in saved but in database it is saved
-      //  -- P2 -- BUG 
-      // Can revisit if time allowed
+
       console.log(data);
       location.reload();
     });
@@ -66,6 +62,7 @@ $(document).on("click", "#scrape", function(event) {
 
 // When you click the save button to save an article
 $(document).on("click", ".savearticle", function(event) {
+
   event.preventDefault();
   // Grab the id associated with the article from the submit button
   var thisId = $(this).attr("id");
@@ -77,40 +74,30 @@ $(document).on("click", ".savearticle", function(event) {
   })
     // With that done
     .then(function(data) {
-      // Log the response
-      // Now the response is not logging true in saved but in database it is saved
-      //  -- P2 -- BUG 
-      // Can revisit if time allowed
       console.log(data);
     });
 
-  // Also, remove the values entered in the input and textarea for note entry
   $(this).text("Saved");
   $(this).attr("disabled", true);
   location.reload();
 });
 
-// When you click the save button to save an article
+// When you click the unsave button to unsave an article
 $(document).on("click", ".unsavearticle", function(event) {
   event.preventDefault();
   // Grab the id associated with the article from the submit button
   var thisId = $(this).attr("id");
 
-  // Run a POST request to change the note, using what's entered in the inputs
+  // Run a POST request to /unsave
   $.ajax({
     method: "POST",
     url: "/unsaved/" + thisId
   })
     // With that done
     .then(function(data) {
-      // Log the response
-      // Now the response is not logging true in saved but in database it is saved
-      //  -- P2 -- BUG 
-      // Can revisit if time allowed
       console.log(data);
     });
 
-  // Also, remove the values entered in the input and textarea for note entry
   $(this).text("Saved");
   $(this).attr("disabled", true);
   location.reload();
