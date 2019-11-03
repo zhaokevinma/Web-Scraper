@@ -3,34 +3,30 @@
   <head>
     <meta charset="UTF-8">
     <title>Scraping With Mongoose</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <style>
-      body { background-color: #F2F6D0 }
-      #wrapper {
+      body { background-color: lightgray }
+      .wrapper {
         width: 960px;
-        margin-left: auto;
-        margin-right: auto;
-        padding-top: 5%;
+        margin: 50px;
+      }
+      .sub-jumbo {
+        margin:0 200px;
       }
       #articles {
         display: inline-block;
         overflow: auto;
-        width: 33%;
         height: 700px;
       }
       #saved {
         display: inline-block;
         overflow: auto;
-        width: 33%;
         height: 700px;
-      }
-      #notes {
-        float: right;
-        width: 33%;
       }
       textarea, input {
         display: block;
         width: 100%;
-        background-color: #FCF5C7;
+        background-color: rgb(189, 207, 173);
       }
       input {
         height: 36px;
@@ -43,19 +39,39 @@
     </style>
   </head>
   <body>
-    <div id="wrapper">
-      <div>
-        <h1>Note Scraper</h1>
-        <button id="scrape">Scrape New</button>
-        <button id="clear">Clear All</button>
+    <div class="jumbotron">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <h1>Echo JS Scraper</h1>
+            <button class="btn btn-lg btn-primary" id="scrape">Scrape New</button>
+            <button class="btn btn-lg btn-primary" id="clear">Clear All</button>
+          </div>
+          <div class="col-sm-6">
+            <h2>
+              <ul>
+                <li>Click "Clear All" to clear the page</li>
+                <li>Click "Scrape" to get latest articles</li>
+                <li>Click "Save" to save an article</li>
+                <li>Click on an article to add a note</li>
+              </ul>
+            </h2>
+          </div>
+        </div>
       </div>
-      <div id="saved">
-        <h3>Saved</h3>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4" id="saved">
+          <h3>Saved</h3>
+        </div>
+        <div class="col-sm-4" id="articles">
+          <h3>Articles</h3>
+        </div> 
+        <div class="col-sm-4" id="notes">
+          <h3>Notes</h3>
+        </div>
       </div>
-      <div id="articles">
-        <h3>Scraped</h3>
-      </div>
-      <div id="notes"></div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="app.js"></script>

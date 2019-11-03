@@ -2,9 +2,11 @@
 $.getJSON("/articles", function(data) {
   // For each one
   for (var i = 0; i < data.length; i++) {
-    // Display the apropos information on the page
-    $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
-    $("#articles").append("<button class='savearticle' id='" + data[i]._id + "'> Save " + "</button>");
+    if (!data[i].saved) {
+      // Display the apropos information on the page
+      $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
+      $("#articles").append("<button class='savearticle btn-primary' id='" + data[i]._id + "'> Save " + "</button>");
+    }
   }
 });
 
@@ -14,7 +16,7 @@ $.getJSON("/saved", function(data) {
   for (var i = 0; i < data.length; i++) {
     // Display the apropos information on the page
     $("#saved").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
-    $("#saved").append("<button class='unsavearticle' id='" + data[i]._id + "'> Unsave " + "</button>");
+    $("#saved").append("<button class='unsavearticle btn-primary' id='" + data[i]._id + "'> Unsave " + "</button>");
   }
 });
 
@@ -58,12 +60,8 @@ $(document).on("click", "#scrape", function(event) {
       //  -- P2 -- BUG 
       // Can revisit if time allowed
       console.log(data);
+      location.reload();
     });
-
-  // Also, remove the values entered in the input and textarea for note entry
-  $(this).text("Scraped");
-  $(this).attr("disabled", true);
-  location.reload();
 });
 
 // When you click the save button to save an article
@@ -141,7 +139,7 @@ $(document).on("click", "p", function() {
       // A textarea to add a new note body
       $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
       // A button to submit a new note, with the id of the article saved to it
-      $("#notes").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
+      $("#notes").append("<button data-id='" + data._id + "' id='savenote' class='btn-primary'>Save Note</button>");
 
       // If there's a note in the article
       if (data.note) {
