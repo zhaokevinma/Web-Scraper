@@ -44,8 +44,8 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-var MONGO_URI = process.env.MONGO_URI;
-mongoose.connect(MONGO_URI, { useNewUrlParser: true });
+var MONGO_URI = "mongodb://heroku_g9jmh4dd:ull2fra562vogmuruvk7haacrc@ds241258.mlab.com:41258/heroku_g9jmh4dd";
+mongoose.connect(MONGO_URI);
 
 
 // -- Routes --
